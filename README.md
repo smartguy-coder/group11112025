@@ -8,3 +8,8 @@
 
 - uv run -m app.main
 - python .\app\main.py
+
+
+## testing
+- uv add pytest
+- group11112025\revision\app> uv run -m pytest .
