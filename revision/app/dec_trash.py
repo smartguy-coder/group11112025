@@ -101,7 +101,6 @@ def log_decorator(filename = "log.csv") -> Callable:
 
 @log_decorator('foo.log')
 @converting_to_dict_optional
-# foo = converting_to_dict_optional(foo)
 def foo() -> int:
     """bla bla"""
     print(555555555555555555555555555555555555)
