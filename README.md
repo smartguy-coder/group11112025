@@ -13,3 +13,5 @@
 ## testing
 - uv add pytest
 - group11112025\revision\app> uv run -m pytest .
+- group11112025\revision\app> uv run -m pytest . -v
+- group11112025\revision\app> uv run -m pytest . -s
