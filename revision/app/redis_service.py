@@ -48,3 +48,12 @@ data_from_dict = redis_client.hgetall('user:1234')
 
 # DELETE
 # redis_client.delete('list-key', 'user:1234')
+
+
+# =======================================================================
+redis_client.incr('views', 16)
+print(redis_client.get('views'))
+
+# PUB / SUB
+
+redis_client.publish('weather', 'in Odesa - fog')
