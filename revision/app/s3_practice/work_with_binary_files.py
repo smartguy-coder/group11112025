@@ -1,8 +1,12 @@
+from pprint import pprint
+
 import requests
+import boto3
+
 
 url = 'https://armyinform.com.ua/wp-content/uploads/2025/12/armiya-tv_udary-po-naftovij-platformi.jpg'
 
-response = requests.get(url=url)
+# response = requests.get(url=url)
 # print(response.content)
 # with open('s3_practice/platformi.jpg', mode='bw') as file:
 #     file.write(response.content)
@@ -13,50 +17,28 @@ response = requests.get(url=url)
 # with open('s3_practice/platformi.jpg', mode='ba') as file:
 #     file.write(b' hello there')
 
-import boto3
-from botocore.config import Config
+
+BUCKET_NAME = 'group11112025'
+PUBLIC_URL ='https://pub-f8a0a61d58744db88283773e03043bb4.r2.dev'
 
 s3 = boto3.client(
     "s3",
-    region_name="us-east-1",
-    endpoint_url="https://objstorage.leapcell.io",
-    aws_access_key_id="cb67e4bbfcfa4d10ba3ac6a4623f0c8a",
-    aws_secret_access_key="1e8d341be3ed5ce625a0d24ede4c3fe92e2f8a3c6511f07c9a87a556dc838b83",
-    config=Config(
-        signature_version='s3v4',
-        s3={'addressing_style': 'virtual'}  # або 'virtual'
-    )
+    region_name="EEUR",
+    endpoint_url="https://8721af4803f2c3c631a90d8b64d397b7.r2.cloudflarestorage.com",
+    aws_access_key_id="2ae25d402a48e45a66e8400661cb1e8f",
+    aws_secret_access_key="32d65a0b27b9fb3789484262804a790c877a1257d96831a197f2cb182b616bdd",
 )
 
+# UPLOAD FILE
+target_filename = 'images/spring12355.jpeg'
+s3.upload_file('s3_practice/platformi.jpg', BUCKET_NAME, target_filename)
+maybe_url = f'{PUBLIC_URL}/{target_filename}'
+print(maybe_url)
 
+# LIST OF FILES
 
-# List files
-response = s3.list_objects_v2(Bucket="test1-pc5o-swmd-ahdtsabh")
-for obj in response.get("Contents", []):
-    print(obj["Key"])
+# response = s3.list_objects_v2(Bucket=BUCKET_NAME)
+# pprint(response)
 
-# # Upload a file
-# s3.put_object(
-#     Bucket="test1-pc5o-swmd-ahdtsabh",
-#     Key="example11.txt",
-#     Body="Hello, this is a sample file content."
-# )
-#
-# # Download a file
-# response = s3.get_object(
-#     Bucket="test1-pc5o-swmd-ahdtsabh",
-#     Key="example.txt"
-# )
-# content = response["Body"].read().decode("utf-8")
-# print("Downloaded content:", content)
-#
-# # Delete files
-# s3.delete_objects(
-#     Bucket="test1-pc5o-swmd-ahdtsabh",
-#     Delete={
-#         "Objects": [
-#             {"Key": "example.txt"},
-#             {"Key": "another_file.txt"}
-#         ]
-#     }
-# )
+# DOWNLOAD
+# s3.download_file(BUCKET_NAME, target_filename, 's3_practice/5555.jpg')
