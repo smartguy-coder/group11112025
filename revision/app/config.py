@@ -16,3 +16,8 @@ REDIS_PASSWORD = os.getenv('REDIS_PASSWORD')
 
 JWT_SECRET = os.getenv('JWT_SECRET')
 
+
+PGHOST = os.getenv('PGHOST')
+PGDATABASE = os.getenv('PGDATABASE')
+PGUSER = os.getenv('PGUSER')
+PGPASSWORD = os.getenv('PGPASSWORD')
